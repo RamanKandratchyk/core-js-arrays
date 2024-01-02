@@ -500,19 +500,13 @@ function findCommonElements(arr1, arr2) {
 function findLongestIncreasingSubsequence(nums) {
   let prev = nums[0] - 1;
   let seqLength = 0;
-  const seqLengthArr = [];
-  nums.map((n) => {
-    if (n > prev) {
-      seqLength += 1;
-    } else {
-      seqLengthArr.push(seqLength);
-      seqLength = 1;
-    }
-    prev = n;
-    return n;
-  });
-  seqLengthArr.push(seqLength);
-  return seqLengthArr.sort((a, b) => b - a)[0];
+  return nums
+    .map((n) => {
+      seqLength = n > prev ? seqLength + 1 : 1;
+      prev = n;
+      return seqLength;
+    })
+    .sort((a, b) => b - a)[0];
 }
 
 /**
